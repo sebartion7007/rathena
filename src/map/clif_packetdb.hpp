@@ -2299,6 +2299,7 @@
 	packet(0x0A84,94);
 #endif
 
+// 2016-09-21bRagexeRE
 #if PACKETVER >= 20160921
 	packet(0x0A37,59);
 #endif
