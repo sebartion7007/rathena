@@ -1,0 +1,92 @@
+morocc,119,121,6	script	เทพเจ้าจุติ	549,{
+	mes "^FF0000[ เทพเจ้าจุติ ]^000000";
+	mes "กรุณาเลือกเมนูที่ท่านต้องการ";
+	next;
+	switch(select("^FF0000•^000000 จุติเลเวล:^FF0000•^000000 เปิดระบบจุติเลเวลออโต้:^FF0000•^000000 ปิดระบบจุติเลเวลออโต้:^FF0000•^000000 จุติสกิล:^FF0000•^000000 เปิดระบบจุติสกิลออโต้:^FF0000•^000000 ปิดระบบจุติสกิลออโต้")) {
+		case 1:
+			if (BaseLevel < 99) {
+				mes "^FF0000[ เทพเจ้าจุติ ]^000000";
+				mes "ท่านไม่สามารถจุติเลเวลได้ เนื่องจากท่านมีเลเวลไม่ถึง 99";
+				end;
+			}
+			mes "^FF0000[ เทพเจ้าจุติ ]^000000";
+			mes "ท่านจุติเลเวลไปแล้วทั้งหมด "+ rbcountlevel +" ครั้ง";
+			mes "ท่านต้องการจุติเลเวลหรือไม่ ?";
+			next;
+			if (select("^FF0000•^000000 ตกลง:^FF0000•^000000 ยกเลิก") == 1) {
+				set BaseLevel,1;
+				set rbcountlevel,rbcountlevel +1;
+				announce "Rebirth : ผู้เล่น [ "+ strcharinfo(0) +" ] ได้จุติเลเวลไปแล้ว "+ rbcountlevel +" ครั้ง !!",0;
+				end;
+			}
+			end;
+		case 2:
+			mes "^FF0000[ เทพเจ้าจุติ ]^000000";
+			mes "เปิดระบบจุติเลเวลออโต้เรียบร้อย";
+			set autorebirthlevel,1;
+			end;
+		case 3:
+			mes "^FF0000[ เทพเจ้าจุติ ]^000000";
+			mes "ปิดระบบจุติเลเวลออโต้เรียบร้อย";
+			set autorebirthlevel,0;
+			end;
+		case 4:
+			if (JobLevel < 70) {
+				mes "^FF0000[ เทพเจ้าจุติ ]^000000";
+				mes "ท่านไม่สามารถจุติสกิลได้ เนื่องจากท่านมีจ๊อบเลเวลไม่ถึง 65";
+				end;
+			}
+			mes "^FF0000[ เทพเจ้าจุติ ]^000000";
+			mes "ท่านจุติสกิลไปแล้วทั้งหมด "+ rbcountskill +" ครั้ง";
+			mes "ท่านต้องการจุติสกิลหรือไม่ ?";
+			next;
+			if (select("^FF0000•^000000 ตกลง:^FF0000•^000000 ยกเลิก") == 1) {
+				set JobLevel,1;
+				set rbcountskill,rbcountskill +1;
+				announce "Rebirth : ผู้เล่น [ "+ strcharinfo(0) +" ] ได้จุติสกิลไปแล้ว "+ rbcountskill +" ครั้ง !!",0;
+				end;
+			}
+			end;
+		case 5:
+			mes "^FF0000[ เทพเจ้าจุติ ]^000000";
+			mes "เปิดระบบจุติสกิลออโต้เรียบร้อย";
+			set autorebirth,1;
+			end;
+		case 6:
+			mes "^FF0000[ เทพเจ้าจุติ ]^000000";
+			mes "ปิดระบบจุติสกิลออโต้เรียบร้อย";
+			set autorebirth,0;
+			end;
+	}
+
+OnInit:
+	delwaitingroom;
+	waitingroom "  เทพเจ้าจุติ",0;
+	end;
+}
+
+-	script	autorebirthlevel	-1,{
+OnPCBaseLvUpEvent:
+	if (autorebirthlevel == 1) {
+		if (BaseLevel == 99) {
+			set BaseLevel,1;
+			set rbcountlevel,rbcountlevel +1;
+			announce "Rebirth : ผู้เล่น [ "+ strcharinfo(0) +" ] ได้จุติเลเวลไปแล้ว "+ rbcountlevel +" ครั้ง !!",0;
+			end;
+		}
+	}
+	end;
+}
+
+-	script	autorebirthskill	-1,{
+OnPCBaseLvUpEvent:
+	if (autorebirthskill == 1) {
+		if (JobLevel == 70) {
+			set JobLevel,1;
+			set rbcountlevel,rbcountlevel +1;
+			announce "Rebirth : ผู้เล่น [ "+ strcharinfo(0) +" ] ได้จุติเลเวลไปแล้ว "+ rbcountlevel +" ครั้ง !!",0;
+			end;
+		}
+	}
+	end;
+}
